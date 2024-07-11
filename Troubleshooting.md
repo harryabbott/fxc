@@ -59,4 +59,4 @@ Error in cloudtrail is now:
 
  option 3) We only keep a single backup, if we want we can then make the S3 bucket versioned.
 
-### I have opted for option 3, since its a 1-liner and will be easier to search a filename for backup than a versioned bucket.
+### I have opted for option 2, since its a 1-liner and will be easier to search a filename for backup than a versioned bucket.
