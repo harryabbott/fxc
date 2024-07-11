@@ -53,15 +53,10 @@ Error in cloudtrail is now:
  So it would only work as intended in its current state if applied between 00 and 2am, and then there would be a delay on the url working of time-til-2am. 
 
 ## Solutions:
- option 1) sh script could be modified to do an initial run on instance init, \
-           but then this might error if applied between 00:00-2am, bc when it trys to make another tar.gz at 2am it will share a name (locally and s3) \
-           So I would have modify to incl the mm-hh-dd-mm-yy.tar.gz, \
-           but this then means the url outputted might not be accurate as a big zip might take longer than 1min, so the url would be wrong, so just the HH might be necessary 
+ option 1) An easier fix would be outputting a URL to the directory instead, rather than the specific file. but this is not in the task definition.
 
- option 2) An easier fix would be outputting a URL to the directory instead, rather than the specific file. but this is not in the task definition.
+ option 2) We make an initial run, S3 auto overwrites items of the same name. meaning if ran between 00-2am the initial run would be overwritten at 2am
 
- option 3) We make an initial run, S3 auto overwrites items of the same name. meaning if ran between 00-2am the initial run would be overwritten at 2am
-
- option 4) We only keep a single backup, if we want we can then make the S3 bucket versioned.
+ option 3) We only keep a single backup, if we want we can then make the S3 bucket versioned.
 
 ### I have opted for option 3, since its a 1-liner and will be easier to search a filename for backup than a versioned bucket.
