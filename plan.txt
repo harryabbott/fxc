@@ -1,0 +1,12 @@
+
+Interrupt received.
+Please wait for Terraform to exit or data loss may occur.
+Gracefully shutting down...
+
+Stopping operation...
+
+Changes to Outputs:
+  + backup_file_url = "https://harrys-backup-bucket-fxc-interview.s3.amazonaws.com/backup-$(date +'%Y-%m-%d').tar.gz"
+
+You can apply this plan to save these new output values to the Terraform
+state, without changing any real infrastructure.
