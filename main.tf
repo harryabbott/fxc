@@ -53,16 +53,20 @@ resource "aws_iam_role" "backup_role" { #linked to instance profile, used by scr
 resource "aws_iam_role_policy" "backup_policy" {
   name = "backup_policy"
   role = aws_iam_role.backup_role.id
+  
   policy = jsonencode({
     Version = "2012-10-17",
-    Statement = [{
-      Effect = "Allow",
-      Action = [
-        "s3:PutObject",
-        "s3:PutObjectAcl"
-      ],
-      Resource = "arn:aws:s3:::${var.backup_bucket_name}/*"
-    }]
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "s3:PutObject",
+          "s3:PutObjectAcl",
+          "s3:ListBucket"
+        ],
+        Resource = ["arn:aws:s3:::${var.backup_bucket_name}/*", "arn:aws:s3:::${var.backup_bucket_name}"]
+      }
+    ]
   })
 }
 

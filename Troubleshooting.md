@@ -60,3 +60,21 @@ Error in cloudtrail is now:
  option 3) We only keep a single backup, if we want we can then make the S3 bucket versioned.
 
 ### I have opted for option 2, since its a 1-liner and will be easier to search a filename for backup than a versioned bucket.
+
+--
+
+# Fixes after submission (~17:00 12/7) - Sorry!
+
+AWS support got back to me, my account is re-enabled. Apply worked so was able to test!
+
+- The script isnt present in there due to it being ran as root and the ec2-user home dir was presumed, but since it wasnt ran as ec2-user, it was wrong.. 
+
+- also learnt Amazon linux doesnt come with crontab preinstalled, so added crond to the init bit of the sh script.
+
+These have been fixed in databackup.sh
+
+
+- The output also doesnt seem to inject the timestamp into the url. Fixed this by adding a local var with a timestamp. \
+This does make the filename between the script and outputs unlinked, but trying to add it to the script it didnt like the {} with the injection.
+
+The script within the ec2 also does not use the bucket name variable. it is hard coded, since the TF Var injection doesnt work on this un-tracked file. 
